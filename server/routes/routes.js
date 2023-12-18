@@ -2,10 +2,11 @@
 
 const express = require('express');
 
-const signUp=require('../controller/Auth')
+const {OTPsender,signUp}=require('../controller/Auth')
 const router = express.Router();
 
 // Route to create a new user
-router.post('/signup', signUp);
+router.post('/OTP', OTPsender);
+router.post('/signUp', signUp);
 
 module.exports = router;

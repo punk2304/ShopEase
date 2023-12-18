@@ -2,34 +2,13 @@ const mongoose = require("mongoose");
 const mailSender = require("../utils/mailSender");
 // const emailTemplate = require("../mail/templates/emailVerificationTemplate");
 const OTPSchema = new mongoose.Schema({
-	firstName: {
-		type: String,
-		required: true,
-		trim: true,
-	},
-	lastName: {
-		type: String,
-		required: true,
-		trim: true,
-	},
 	// Define the email field with type String, required, and trimmed
 	email: {
 		type: String,
 		required: true,
 		trim: true,
 	},
-
-	// Define the password field with type String and required
-	password: {
-		type: String,
-		required: true,
-	},
-	// Define the role field with type String and enum values of "Admin", "Student", or "Visitor"
-	accountType: {
-		type: String,
-		enum: ["Customer", "Seller"],
-		required: true,
-	},
+	
 	otp: {
 		type: String,
 		required: true,
