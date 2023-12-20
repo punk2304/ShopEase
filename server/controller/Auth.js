@@ -2,9 +2,10 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const OTP = require('../models/OTP');
-const {generateOTP}=require('../utils/otpGenerator')
-const Profile=require('../models/Profile')
-
+const {generateOTP}=require('../utils/otpGenerator');
+const Profile=require('../models/Profile');
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 
 // OTP controller
@@ -21,7 +22,7 @@ const OTPsender=async (req, res) => {
     let result = await OTP.findOne({ otp: otp });
 
     while(result){
-        otp=generateOTP;
+        otp=generateOTP();
         result = await OTP.findOne({ otp: otp });
     }
 
@@ -153,6 +154,86 @@ const signUp = async (req, res) => {
 
 
 
+const login = async(req, res) =>{
+	try{
+		  	const {email, password} = req.body;
+  
+		  	// Check if email or password is missing
+		  	if (!email || !password) {
+		  
+				// Return 400 Bad Request status code with error message
+				return res.status(400).json({
+				success: false,
+				message: `Please Fill up All the Required Fields`,
+				});
+		 	}
+  
+			// Find user with provided email
+			const user = await User.findOne({ email });
+  
+			// If user not found with provided email
+			if (!user) {
+				// Return 401 Unauthorized status code with error message
+				return res.status(401).json({
+				success: false,
+				message: `User is not Registered with Us Please SignUp to Continue`,
+				});
+		 	}
+		  	else{
+				// Hash the password
+				// const checkhashedPassword = await bcrypt.hash(password, 10);
+				
+				if( !(await bcrypt.compare(password, user.password)) )
+				{
+					return res.status(401).json({
+						success: false,
+						message: `Password entered for the User is incorrect, Please tryy again`
+						// correctPassword: user.hashedPassword	
+					});
+				}
+				else{
 
-module.exports = {OTPsender,signUp};
+					//generate AWT, after password matching
+					const payload = {
+						email: user.email,
+						id: user._id,
+						accountType: user.accountType
+					}
+
+					const token = jwt.sign(payload, process.env.JWT_SECRET, {
+						expiresIn: "2h"
+					});
+					user.token = token;
+					user.password = undefined;
+
+					//create cookie and send response
+					const options = {
+						expiresIn: new Date(Date.now() + 2*60*60*1000),
+						httpOnly: true
+					}
+
+					res.cookie("token", token, options).status(200).json({
+						success: true,
+						token,
+						user,
+						message: "User logged in successfully",
+					});
+				}
+	  
+		  	}
+		}
+		catch (error) {
+			console.error(error);
+			// Return 500 Internal Server Error status code with error message
+			return res.status(500).json({
+				success: false,
+				message: `Login Failure Please Try Again`,
+			});
+		}
+};
+
+
+
+
+module.exports = {OTPsender, signUp, login};
 
