@@ -6,7 +6,7 @@ const {generateOTP}=require('../utils/otpGenerator');
 const Profile=require('../models/Profile');
 const jwt = require("jsonwebtoken");
 const otpSignUp = require("../templates/otpSignUp");
-
+const otpChangePassword = require("../templates/otpChangePassword");
 require("dotenv").config();
 
 
@@ -295,12 +295,78 @@ const changePassword = async(req, res) =>{
 		 }
 	}
 	catch(error){
+		// If there's an error updating the password, log the error and return a 500 (Internal Server Error) error
+		console.error("Error occurred while sending change password OTP:", error);
+		return res.status(500).json({
+			success: false,
+			message: "Error occurred while sending change password OTP",
+			error: error.message,
+		});
+	}
+}
 
+
+
+const verifyOTP = async(req, res) =>{
+
+	try{
+		const {email, otp, newPassword} = req.body;
+
+		if (!email || !newPassword || !otp) {
+		  
+			// Return 400 Bad Request status code with error message
+			return res.status(400).json({
+			success: false,
+			message: `Please Fill up All the Required Fields`,
+			});
+		 }		
+
+		 // Find the most recent OTP for the email
+		const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
+		console.log(response);
+		if (response.length === 0) {
+			// OTP not found for the email
+			return res.status(400).json({
+				success: false,
+				message: "The OTP is not valid",
+			});
+		} else if (otp !== response[0].otp) {
+			// Invalid OTP
+			return res.status(400).json({
+				success: false,
+				message: "The OTP is not valid",
+			});
+		}
+		else if(otp == response[0].otp) {
+			// Find user with provided email
+			const user = await User.findOne({ email });
+
+			// Update password
+			const encryptedPassword = await bcrypt.hash(newPassword, 10);
+			const updatedUserDetails = await User.findByIdAndUpdate(
+				user.id,
+				{ password: encryptedPassword }
+			);
+  
+			// Return success response
+			return res.status(200).json({ 
+				success: true, message: "Password updated successfully"
+			});
+		}
+	}
+	catch(error){
+		// If there's an error updating the password, log the error and return a 500 (Internal Server Error) error
+		console.error("Error occurred while updating password:", error);
+		return res.status(500).json({
+			success: false,
+			message: "Error occurred while updating password",
+			error: error.message,
+		});
 	}
 }
 
 
 
 
-module.exports = {OTPsender, signUp, login};
+module.exports = {OTPsender, signUp, login, changePassword, verifyOTP};
 
