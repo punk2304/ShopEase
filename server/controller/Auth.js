@@ -1,10 +1,12 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
-const OTP = require('../models/OTP');
+const {OTP, sendVerificationEmail} = require('../models/OTP');
 const {generateOTP}=require('../utils/otpGenerator');
 const Profile=require('../models/Profile');
 const jwt = require("jsonwebtoken");
+const otpSignUp = require("../templates/otpSignUp");
+
 require("dotenv").config();
 
 
@@ -32,8 +34,11 @@ const OTPsender=async (req, res) => {
       otp,
     });
 
-
+	
     await newOTP.save();
+	await sendVerificationEmail(email, otp, otpSignUp);	
+	
+	console.log("New document saved to database");
 
     res.json({
       success: true,
@@ -231,6 +236,68 @@ const login = async(req, res) =>{
 			});
 		}
 };
+
+
+const changePassword = async(req, res) =>{
+
+	try{
+		const {email} = req.body;
+
+		// Check if email is missing
+		if (!email) {
+		
+			// Return 400 Bad Request status code with error message
+			return res.status(400).json({
+			success: false,
+			message: `Please Fill up the EMAIL ID`,
+			});
+		}
+
+		// Find user with provided email
+		const user = await User.findOne({ email });
+  
+		if (!user) {
+			// Return 401 Unauthorized status code with error message
+			return res.status(401).json({
+			success: false,
+			message: `User is not Registered with Us Please SignUp to Continue`,
+			});
+		 }
+		 else{
+			let otp=generateOTP();
+			let result = await OTP.findOne({ otp: otp });
+		
+			while(result){
+				otp=generateOTP();
+				result = await OTP.findOne({ otp: otp });
+			}
+		
+			// Create a new OTP document
+			const newOTP = new OTP({
+			  email,
+			  otp,
+			});
+		
+			
+			await newOTP.save();
+			await sendVerificationEmail(email, otp, otpChangePassword);	
+			
+			console.log("New document saved to database");
+		
+			res.json({
+			  success: true,
+			  message: 'otp sent',
+			  user: {
+			  
+				email
+			  },
+			});
+		 }
+	}
+	catch(error){
+
+	}
+}
 
 
 

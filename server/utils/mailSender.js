@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 const otpSignUp = require("../templates/otpSignUp")
 
 
-const mailSender = async (email, title, body) => {
+const mailSender = async (email, title, body, otp) => {
     try{
             let transporter = nodemailer.createTransport({
                 host:process.env.MAIL_HOST,
@@ -18,7 +18,7 @@ const mailSender = async (email, title, body) => {
                 name:'Papyrus | NIT kurukshetra',
                 to:`${email}`,
                 subject: `${title}`,
-                html: otpSignUp(),
+                html: body(otp),
             })
             console.log(info);
             return info;
