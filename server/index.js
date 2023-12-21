@@ -1,11 +1,12 @@
 const express = require("express");
 const app = express();
+const cors = require('cors');
 
 require('dotenv').config();
 const PORT = process.env.PORT || 4000;
 
 
-
+app.use(cors());
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
@@ -17,6 +18,8 @@ require("./config/database").connect();
 const user = require("./routes/routes");
 app.use("/api/v1", user);
 //actuivate
+
+app.options('*', cors());
 
 app.listen(PORT, () => {
     console.log(`App is listening at ${PORT}`);

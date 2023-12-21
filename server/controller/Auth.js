@@ -64,9 +64,9 @@ const signUp = async (req, res) => {
 			password,
 			confirmPassword,
 			accountType,
-			contactNumber,
 			otp,
 		} = req.body;
+		 console.log(email);
 		// Check if All Details are there or not
 		if (
 			!firstName ||
@@ -134,7 +134,6 @@ const signUp = async (req, res) => {
 			firstName,
 			lastName,
 			email,
-			contactNumber,
 			password: hashedPassword,
 			accountType: accountType,
 			approved: approved,
