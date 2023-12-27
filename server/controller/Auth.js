@@ -66,7 +66,13 @@ const signUp = async (req, res) => {
 			accountType,
 			otp,
 		} = req.body;
-		 console.log(email);
+		console.log(firstName);
+		console.log(lastName);
+		console.log(email);
+		console.log(password);
+		console.log(confirmPassword);
+		console.log("accounttype", accountType);
+		console.log(otp);
 		// Check if All Details are there or not
 		if (
 			!firstName ||
@@ -101,7 +107,7 @@ const signUp = async (req, res) => {
 
 		// Find the most recent OTP for the email
 		const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
-		console.log(response);
+		// console.log(response);
 		if (response.length === 0) {
 			// OTP not found for the email
 			return res.status(400).json({

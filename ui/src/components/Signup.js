@@ -12,12 +12,12 @@ const SignUp = () => {
    
   const [formData, setFormData] = useState({
  // Default to 'customer'
+    accountType: 'Seller',
     firstName: '',
     lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
-    accountType: '',
   });
 
   const handleChange = (e) => {
@@ -52,7 +52,7 @@ sendOtp(formData.email,navigate);
           User Type:
           <select
             name="accountType"
-            value={formData.accoutType}
+            value={formData.accountType}
             onChange={handleChange}
             required>
             <option value="Customer">Customer</option>

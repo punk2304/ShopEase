@@ -7,7 +7,7 @@ import { signUp } from "../services/operations/authAPI";
 
 const VerifyEmail = () => {
   const [otp, setOtp] = useState('');
-  const{ signupData } = useSelector((state) => state.auth);
+  const {signupData} = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ const VerifyEmail = () => {
       navigate("/signup");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   const handleChange = (e) => {
     setOtp(e.target.value);
