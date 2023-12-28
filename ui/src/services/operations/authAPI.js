@@ -44,6 +44,7 @@ const {
     otp,navigate) => {
     
     try {
+      console.log("signUp post req data",firstName,lastName,email,password,confirmPassword,accountType,otp);
       const response = await apiConnector(
         "POST",
         "http://localhost:4000/api/v1/signUp",
