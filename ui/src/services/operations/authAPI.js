@@ -2,7 +2,9 @@ import { useNavigate } from "react-router-dom";
 import { apiConnector } from "../apiconnector"
 import { endpoints } from "../apis"
 import { setToken } from "../../slices/authSlice";
-import { useDispatch } from "react-redux";
+
+import {setUser} from "../../slices/authSlice";
+
 
 
 const {
@@ -13,7 +15,8 @@ const {
 
 
   export const sendOtp = async (email, navigate) => {
-    
+  
+
     try {
       const response = await apiConnector(
         "POST",
@@ -95,9 +98,13 @@ export const login = async (email, password, navigate, dispatch) =>{
     console.log(response.data.success);
     console.log("token", response.data.token);
     
+    localStorage.setItem("token", JSON.stringify(response.data.token))
+      localStorage.setItem("user", JSON.stringify(response.data.user))
+
     // return response.data.token;
     dispatch(setToken(response.data.token));
-    navigate('/');    
+    dispatch(setUser(response.data.user));
+    navigate("/dashboard/my-profile"); 
 
   }catch(error){
     console.log("Can't login");
@@ -151,3 +158,15 @@ export const verifyOTP = async (email, otp, newPassword, navigate) => {
     console.log("unable to change password");
   }
 };
+
+export function logout(navigate) {
+  return (dispatch) => {
+    dispatch(setToken(null))
+    dispatch(setUser(null))
+
+    localStorage.removeItem("token")
+    localStorage.removeItem("user")
+
+    navigate("/")
+  }
+}

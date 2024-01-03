@@ -66,6 +66,7 @@ const signUp = async (req, res) => {
 			accountType,
 			otp,
 		} = req.body;
+		console.log("we are inside auth controller")
 		console.log(firstName);
 		console.log(lastName);
 		console.log(email);
@@ -179,7 +180,7 @@ const login = async(req, res) =>{
 		 	}
   
 			// Find user with provided email
-			const user = await User.findOne({ email });
+			const user = await User.findOne({ email }).populate("additionalDetails");
   
 			// If user not found with provided email
 			if (!user) {

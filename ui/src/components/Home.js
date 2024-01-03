@@ -7,14 +7,7 @@ const Home = () => {
 
     return(
       <div>
-        <div>this is home page</div>
-        <div>
-          <Link to="/signup"> sign up here</Link>
-          <br/>
-          <Link to="/login"> login here</Link>
-          <br/>
-          <Link to="/changePassword"> change password</Link>
-        </div>
+        this is homepage
       </div>
     )
   
