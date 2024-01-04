@@ -159,14 +159,19 @@ export const verifyOTP = async (email, otp, newPassword, navigate) => {
   }
 };
 
-export function logout(navigate) {
-  return (dispatch) => {
-    dispatch(setToken(null))
-    dispatch(setUser(null))
+export const logout=(navigate,dispatch)=> {
+try {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
 
-    localStorage.removeItem("token")
-    localStorage.removeItem("user")
+    dispatch(setToken(null));
+    dispatch(setUser(null));
+console.log("ho gya sb kuch logout");
+ 
 
     navigate("/")
+  }
+  catch (error) {
+    console.log("cant logout");
   }
 }
