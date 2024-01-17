@@ -1,17 +1,36 @@
 const mongoose = require("mongoose");
 
 // Define the Courses schema
-const booksSchema = new mongoose.Schema({
-	courseName: { type: String },
-	courseDescription: { type: String },
-	seller: {
+const coursesSchema = new mongoose.Schema({
+     
+		BookId:{type:String},
+	BookTitle: { type: String },
+	BookDiscription:{type:String},
+	BookAuthor:{
+		type:Number
+	},
+	YearOfPublication:{
+		type:String
+	},
+	Publisher:{
+		type:String
+	},
+	ImageURLS:{
+		type:String
+	},
+	ImageURLM:{
+		type:String
+	},
+	ImageURLL:{
+		type:String
+	},
+
+	seller: [{
 		type: mongoose.Schema.Types.ObjectId,
 		required: true,
 		ref: "user",
-	},
-	aboutTheBook: {
-		type: String,
-	},
+	}],
+	
 	ratingAndReviews: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
@@ -20,29 +39,23 @@ const booksSchema = new mongoose.Schema({
 	],
 	price: {
 		type: Number,
-	},
-	thumbnail: {
-		type: String,
+		default: Math.floor(Math.random() * (2000 - 50 + 1)) + 50,
 	},
 	tag: {
 		type: [String],
-		required: true,
 	},
 	category: {
 		type: mongoose.Schema.Types.ObjectId,
 		// required: true,
 		ref: "Category",
 	},
-	userBrought: [
+	usersBrought: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
 			required: true,
 			ref: "user",
 		},
 	],
-	instructions: {
-		type: [String],
-	},
 	status: {
 		type: String,
 		enum: ["Draft", "Published"],
@@ -54,4 +67,4 @@ const booksSchema = new mongoose.Schema({
 });
 
 // Export the Courses model
-module.exports = mongoose.model("Book", booksSchema);
+module.exports = mongoose.model("book", coursesSchema);

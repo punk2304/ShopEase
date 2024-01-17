@@ -8,8 +8,9 @@ const jwt = require("jsonwebtoken");
 const otpSignUp = require("../templates/otpSignUp");
 const otpChangePassword = require("../templates/otpChangePassword");
 require("dotenv").config();
+const book=require('../models/Book');
 
-
+const RatingAndReview=require('../models/RatingAndReview')
 // OTP controller
 const OTPsender=async (req, res) => {
   const {email} = req.body;
@@ -374,5 +375,35 @@ const verifyOTP = async(req, res) =>{
 
 
 
+  
+	
+  
+
+
 module.exports = {OTPsender, signUp, login, changePassword, verifyOTP};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
