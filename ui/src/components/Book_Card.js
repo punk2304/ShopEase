@@ -1,35 +1,22 @@
-import React, { useEffect, useState } from 'react'
-
-
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Book_Card = ({book, Height}) => {
-
-
+const Book_Card = ({ book, height }) => {
   return (
-    <>
-      <Link to={`/Item/${book._id}`}>
-        <div className="">
-          <div className="round`ed-lg">
-            <img
-              src={book?.ImageURLL}
-              alt="course thumnail"
-              className={`${Height} w-full rounded-xl object-cover `}
-            />
-          </div>
-          <div className="flex flex-col gap-2 px-1 py-3">
-            <p className="text-xl text-richblack-5">{book?.BookTitle}</p>
-            
-            <div className="flex items-center gap-2">
-        
-          
-            </div>
-            <p className="text-xl text-richblack-5">Rs. {book?.price}</p>
-          </div>
-        </div>
-      </Link>
-    </>
-  )
-}
+    <Link to={`/Item/${book._id}`} className="block mb-4">
+      <div className="rounded-lg overflow-hidden">
+        <img
+          src={book?.ImageURLL}
+          alt="book thumbnail"
+          className={`${height} w-full rounded-xl object-cover`}
+        />
+      </div>
+      <div className="flex flex-col gap-2 px-2 py-3">
+        <p className="text-xl text-richblack-5">{book?.BookTitle}</p>
+        <p className="text-xl text-richblack-5">Rs. {book?.price}</p>
+      </div>
+    </Link>
+  );
+};
 
-export default Book_Card
+export default Book_Card;
