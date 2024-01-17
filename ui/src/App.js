@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import SearchPage from './components/SearchPage'; // Corrected importimport Myprofile from './components/Myprofile';
 import Sidebar from './components/Sidebar';
 import Settings from './components/Settings';
+import Myprofile from './components/Myprofile';
 
 
 const App = () => {
@@ -40,7 +41,6 @@ const App = () => {
           }
         />
         {/* <Route path="/changePassword" element={<ChangePassword />} /> */}
-<Navbar/>
 
     {/* <Routes> */}
      
@@ -77,6 +77,7 @@ const App = () => {
         {/* <Route path='*' element={<div> error in link</div>} /> */}
 
     </Routes>
+{/* <Navbar/> */}
     </BrowserRouter>
   );
 };
