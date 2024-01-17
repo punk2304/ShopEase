@@ -12,6 +12,9 @@ import Signup from './components/Signup';
 import VerifyEmail from './components/VerifyEmail';
 import ChangePassword from './components/ChangePassword';
 import { useDispatch, useSelector } from "react-redux";
+import Myprofile from './components/Myprofile';
+import Sidebar from './components/Sidebar';
+import Settings from './components/Settings';
 
 
 const App = () => {
@@ -39,18 +42,23 @@ const App = () => {
         } />
 
 
-<Route path="/signup" element={
-          <OpenRoute>
-            <Signup />
-          </OpenRoute>
-        } />
-
-
-
         <Route path="/changePassword" element={<ChangePassword/>} />
 
         <Route path="/verifyEmail" element={<VerifyEmail />} />
-      
+
+        <Route path="/my-profile" element={<Myprofile/>} />
+        <Route path="/settings" element={<Settings/>} />
+
+        <Route path="/dashboard" element={<Sidebar/>} >
+              <Route path="my-profile" element={<Myprofile/>} />
+              <Route path='my-cart' element={<div>mycart</div>} />
+              <Route path='settings' element={<Settings/>} />
+        </Route>
+
+        {/* <Route path='/dashboard/my-profile' element={<>cheching myprofile</>}/> */}
+
+        {/* <Route path='*' element={<div> error in link</div>} /> */}
+
     </Routes>
     </BrowserRouter>
   );

@@ -1,7 +1,7 @@
 // SignUp.js
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../services/operations/authAPI';
 import { setToken } from '../slices/authSlice';
 
@@ -70,6 +70,9 @@ const Login = () => {
               />
           </label>
           <br/>
+          <div>
+            <Link to='/changePassword'>change password</Link>
+          </div>
           <button type="submit">Login</button>
         </form>
     </div>
