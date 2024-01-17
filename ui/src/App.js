@@ -12,6 +12,7 @@ import SearchPage from './components/SearchPage'; // Corrected importimport Mypr
 import Sidebar from './components/Sidebar';
 import Settings from './components/Settings';
 import Myprofile from './components/Myprofile';
+import Dashboard from './components/Dashboard';
 
 
 const App = () => {
@@ -40,17 +41,6 @@ const App = () => {
             </OpenRoute>
           }
         />
-        {/* <Route path="/changePassword" element={<ChangePassword />} /> */}
-
-    {/* <Routes> */}
-     
-        {/* <Route path="/"  element={<Home/>} />
-        <Route path="/login" element={
-        <OpenRoute>
-          <Login />
-        </OpenRoute>
-        } /> */}
-
 
         <Route path="/signup" element={
           <OpenRoute>
@@ -63,21 +53,16 @@ const App = () => {
 
         <Route path="/verifyEmail" element={<VerifyEmail />} />
 
-        <Route path="/my-profile" element={<Myprofile/>} />
-        <Route path="/settings" element={<Settings/>} />
-
-        <Route path="/dashboard" element={<Sidebar/>} >
+        <Route path="/dashboard" element={<Dashboard/>} >
               <Route path="my-profile" element={<Myprofile/>} />
               <Route path='my-cart' element={<div>mycart</div>} />
               <Route path='settings' element={<Settings/>} />
         </Route>
 
-        {/* <Route path='/dashboard/my-profile' element={<>cheching myprofile</>}/> */}
-
         {/* <Route path='*' element={<div> error in link</div>} /> */}
 
     </Routes>
-{/* <Navbar/> */}
+    
     </BrowserRouter>
   );
 };
