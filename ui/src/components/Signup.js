@@ -43,86 +43,101 @@ sendOtp(formData.email,navigate);
       })
     
   };
+  // Photo by Element5 Digital from Pexels: https://www.pexels.com/photo/selective-focus-photography-of-bookshelf-with-books-1370296/
 
   return (
-    <div>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          User Type:
+    <div className="min-h-screen flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: 'https://www.pexels.com/photo/selective-focus-photography-of-bookshelf-with-books-1370296/' }}>
+    <div className="max-w-md w-full mx-auto p-8 bg-white shadow-lg rounded-lg">
+      <h2 className="text-3xl font-bold mb-6 text-center">Sign Up</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="flex flex-col">
+          <label htmlFor="accountType" className="text-sm font-medium text-gray-600">User Type:</label>
           <select
+            id="accountType"
             name="accountType"
             value={formData.accountType}
             onChange={handleChange}
-            required>
+            className="mt-1 p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
+            required
+          >
             <option value="Customer">Customer</option>
             <option value="Seller">Seller</option>
           </select>
-        </label>
-        <br />
+        </div>
 
-        <label>
-          First Name:
+        <div className="flex flex-col">
+          <label htmlFor="firstName" className="text-sm font-medium text-gray-600">First Name:</label>
           <input
             type="text"
+            id="firstName"
             name="firstName"
             value={formData.firstName}
             onChange={handleChange}
+            className="mt-1 p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
             required
           />
-        </label>
-        <br />
+        </div>
 
-        <label>
-          Last Name:
+        <div className="flex flex-col">
+          <label htmlFor="lastName" className="text-sm font-medium text-gray-600">Last Name:</label>
           <input
             type="text"
+            id="lastName"
             name="lastName"
             value={formData.lastName}
             onChange={handleChange}
+            className="mt-1 p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
             required
           />
-        </label>
-        <br />
+        </div>
 
-        <label>
-          Email:
+        <div className="flex flex-col">
+          <label htmlFor="email" className="text-sm font-medium text-gray-600">Email:</label>
           <input
             type="email"
+            id="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
+            className="mt-1 p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
             required
           />
-        </label>
-        <br />
+        </div>
 
-        <label>
-          Password:
+        <div className="flex flex-col">
+          <label htmlFor="password" className="text-sm font-medium text-gray-600">Password:</label>
           <input
             type="password"
+            id="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
+            className="mt-1 p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
             required
           />
-        </label>
-        <br />
+        </div>
 
-        <label>
-          Confirm Password:
+        <div className="flex flex-col">
+          <label htmlFor="confirmPassword" className="text-sm font-medium text-gray-600">Confirm Password:</label>
           <input
             type="password"
+            id="confirmPassword"
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleChange}
+            className="mt-1 p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
             required
           />
-        </label>
-        <br />
+        </div>
 
-        <button type="submit">Sign Up</button>
+        <button
+          type="submit"
+          className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+        >
+          Sign Up
+        </button>
       </form>
+    </div>
     </div>
   );
 };

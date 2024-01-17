@@ -6,16 +6,10 @@ function Dashboard() {
   return (
     <div>
       <div>
-        this is dashboard
-      </div>
-      <div>
         <Sidebar/>
-        hhhhhhh
       </div>
-      ouside div
       <div>
         <Outlet/>
-        heloooo
       </div>
     </div>
   )

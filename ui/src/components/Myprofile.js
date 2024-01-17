@@ -11,50 +11,63 @@ function Myprofile() {
     const navigate = useNavigate();
 
     const handleClick = ()=>{
-        navigate('/settings');
+        navigate('/dashboard/settings');
     }
 
     return (
-    <div>
-        <div>
-            <div className="">
-                {/* <img src={user?.image} alt="profile image" /> */}
-            </div>
-            <p>{user?.firstName} {user?.lastName}</p>
-            <p>{user?.email}</p>
+        <div className="flex flex-wrap justify-center">
+    <div className="max-w-md bg-white p-6 rounded-lg shadow-md mt-6">
+ 
+        <div className="text-center">
+            <p className="text-xl font-semibold">{user?.firstName} {user?.lastName}</p>
+            <p className="text-gray-600">{user?.email}</p>
+            <div className="mb-4">
+            <img src={user?.image} alt="profile image" className="rounded-full h-16 w-16 mx-auto" />
         </div>
 
-        <div>
-            <span>
-                <p>First Name</p>
+        </div>
+           
+       
+
+        <div className="max-w-md bg-white p-6 rounded-lg shadow-md mt-6 mx-2">
+            <span className="mb-4 block">
+                <p className="font-semibold">First Name</p>
                 <p>{user?.firstName}</p>
             </span>
-            <span>
-                <p>Last Name</p>
+            <span className="mb-4 block">
+                <p className="font-semibold">Last Name</p>
                 <p>{user?.lastName}</p>
             </span>
-            <span>
-                <p>Email</p>
+            <span className="mb-4 block">
+                <p className="font-semibold">Email</p>
                 <p>{user?.email}</p>
             </span>
-            <span>
-                <p>Phone no</p>
-                <p>{user?.additionalDetails?.contactNumber  ?? "Add contact no"} </p>
+            <span className="mb-4 block">
+                <p className="font-semibold">Phone no</p>
+                <p>{user?.additionalDetails?.contactNumber ?? "Add contact no"}</p>
             </span>
-            <span>
-                <p>Gender</p>
-                <p>{user?.additionalDetails?.gender  ?? "Add gender"} </p>
+            <span className="mb-4 block">
+                <p className="font-semibold">Gender</p>
+                <p>{user?.additionalDetails?.gender ?? "Add gender"}</p>
             </span>
-            <span>
-                <p>Date Of Birth</p>
-                <p>{user?.additionalDetails?.dateOfBirth  ?? "Add DOB"} </p>
+            <span className="mb-4 block">
+                <p className="font-semibold">Date Of Birth</p>
+                <p>{user?.additionalDetails?.dateOfBirth ?? "Add DOB"}</p>
             </span>
 
-            <div>
-                <button onClick={handleClick}>edit profile</button>    
+            <div className="text-center">
+                <button
+                    onClick={handleClick}
+                    className="bg-blue-500 text-white px-4 py-2 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+                >
+                    Edit Profile
+                </button>
             </div>
         </div>
     </div>
+</div>
+
+    
   )
 }
 
