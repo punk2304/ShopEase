@@ -7,7 +7,7 @@ import '../index.css'; // Import the main CSS file
 
 const Navbar = () => {
   const { token } = useSelector((state) => state.auth);
-  console.log('hello baby', token);
+  console.log('token', token);
 
   return (
     <nav className="bg-gray-800 p-4 flex justify-between items-center">
