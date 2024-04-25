@@ -23,10 +23,13 @@ const SearchPage = () => {
   }, [searchTerm]);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+    <div className='ml-96 mr-96'>
+    <div className="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-3 gap-1 p-2">
       {PageData?.map((book, i) => (
-        <Book_Card key={i} book={book} height="h-[250px]" />
+       
+        <Book_Card key={i} book={book} />
       ))}
+    </div>
     </div>
   );
 };

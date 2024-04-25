@@ -5,8 +5,8 @@ const search= async (req, res) => {
   const   {searchTerm} = req.body;
 
     const regex = new RegExp(searchTerm.replaceAll("+"," "), 'i');
-
-    const results = await book.find({ BookTitle: regex }).limit(50);
+console.log(searchTerm);
+    const results = await book.find({ title: regex }).limit(15);
 
 
     res.json(results);
