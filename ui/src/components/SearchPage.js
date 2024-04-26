@@ -21,6 +21,7 @@ const SearchPage = () => {
     };
     getSearchItems();
   }, [searchTerm]);
+ 
 
   return (
     <div className='ml-96 mr-96'>
