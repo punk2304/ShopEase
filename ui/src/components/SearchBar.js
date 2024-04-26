@@ -1,30 +1,33 @@
-// components/SearchBar.js
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from 'react-router-dom';
 
 const SearchBar = () => {
-    const navigate=useNavigate();
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = async () => {
     try {
-
-      navigate(`/search/${searchTerm.replaceAll(" ","+")}`);
-    
+      navigate(`/search/${searchTerm.replaceAll(' ', '+')}`);
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <div>
+    <div className="flex items-center">
       <input
         type="text"
         placeholder="Search by title..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
+        className="border border-gray-300 px-2 py-1 rounded-md mr-2"
       />
-      <button onClick={handleSearch}>Search</button>
+      <button
+        onClick={handleSearch}
+        className="bg-blue-500 text-white px-4 py-1 rounded-md"
+      >
+        Search
+      </button>
     </div>
   );
 };

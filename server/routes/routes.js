@@ -6,7 +6,7 @@ const express = require('express');
 const { updateProfile } = require('../controller/Profile');
 const { imageUpload } = require('../config/cloudinary');
 const {OTPsender, signUp, login, changePassword, verifyOTP,hello}=require('../controller/Auth')
-const {search}=require('../controller/Book');
+const {search, filterBooks}=require('../controller/Book');
 
 const router = express.Router();
 
@@ -18,7 +18,7 @@ router.post('/changePassword', changePassword);
 router.post('/verifyOTP', verifyOTP);
 router.post('/search',search);
 
-
+router.post('/filterBooks', filterBooks);
  
 
 router.post('/imageUpload', imageUpload);

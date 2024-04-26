@@ -21,12 +21,7 @@ const ratingAndReviewSchema = new mongoose.Schema({
 		ref: "Books",
 		index: true,
 	},
-	BookId:{
-		type:String,
-	},
-	UserId:{
-		type:String,
-	},
+
 });
 
 // Export the RatingAndReview model

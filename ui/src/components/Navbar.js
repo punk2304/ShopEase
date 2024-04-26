@@ -7,30 +7,35 @@ import '../index.css'; // Import the main CSS file
 
 const Navbar = () => {
   const { token } = useSelector((state) => state.auth);
-  console.log('token', token);
 
   return (
-    <nav className="bg-gray-800 p-4 flex justify-between items-center">
-      <div>
-        <Link to="/" className="text-white text-xl font-bold">Papyrus</Link>
-      </div>
-      <div className="flex space-x-4">
-        <ul className="flex space-x-4">
-          <li>
-            <Link to="/" className="text-white">Home</Link>
-          </li>
-          <li>
-            <SearchBar />
-          </li>
-          <li>
-            <Link to="/about" className="text-white">About Us</Link>
-          </li>
-        </ul>
-      </div>
-      <div>
-        {token === null && <Link to="/login" className="text-white">Login</Link>}
-        {token === null && <Link to="/signup" className="text-white">Signup</Link>}
-        {token !== null && <ProfileDropdown />}
+    <nav className="bg-white p-4 shadow-md">
+      <div className="container mx-auto flex items-center justify-between">
+        <div>
+          <Link to="/" className="text-black text-2xl font-bold">
+            Papyrus
+          </Link>
+        </div>
+        <div className="flex items-center space-x-4">
+          <ul className="flex space-x-4">
+            <li>
+              <Link to="/" className="text-black">Home</Link>
+            </li>
+            <li>
+              <Link to="/about" className="text-black">About Us</Link>
+            </li>
+          </ul>
+          <SearchBar />
+          <div className="flex items-center space-x-4">
+            {token === null && (
+              <>
+                <Link to="/login" className="text-black">Login</Link>
+                <Link to="/signup" className="text-black">Signup</Link>
+              </>
+            )}
+            {token !== null && <ProfileDropdown />}
+          </div>
+        </div>
       </div>
     </nav>
   );

@@ -42,14 +42,6 @@ const userSchema = new mongoose.Schema(
 			enum: ["Customer", "Seller"],
 			required: true,
 		},
-		active: {
-			type: Boolean,
-			default: true,
-		},
-		approved: {
-			type: Boolean,
-			default: true,
-		},
 		additionalDetails: {
 			type: mongoose.Schema.Types.ObjectId,
 			required: true,
@@ -61,9 +53,6 @@ const userSchema = new mongoose.Schema(
 				ref: "Books",
 			},
 		],
-		token: {
-			type: String,
-		},
 		resetPasswordExpires: {
 			type: Date,
 		},
@@ -71,9 +60,20 @@ const userSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
+		coldstart:{
+			type:Boolean,
+			default:true
+		},
+		ratings:[
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "RatingAndReview",
+			}
+		]
+		
 	
 
-		// Add timestamps for when the document is created and last modified
+	
 	},
 	{ timestamps: true }
 );
