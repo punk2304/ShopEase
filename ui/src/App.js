@@ -13,6 +13,7 @@ import Sidebar from './components/Sidebar';
 import Settings from './components/Settings';
 import Myprofile from './components/Myprofile';
 import Dashboard from './components/Dashboard';
+import RateBooks from './components/RateBooks'
 
 
 const App = () => {
@@ -58,6 +59,9 @@ const App = () => {
               <Route path='my-cart' element={<div>mycart</div>} />
               <Route path='settings' element={<Settings/>} />
         </Route>
+
+        <Route path="/rateBooks" element={<RateBooks />} />
+
 
         {/* <Route path='*' element={<div> error in link</div>} /> */}
 

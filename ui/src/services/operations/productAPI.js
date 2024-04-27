@@ -1,22 +1,27 @@
 import { apiConnector } from "../apiconnector"
 
 
-export const search=(navigate,dispatch,title)=> {
+export const favCategory=async (navigate,selectedGenres,userId)=> {
+  console.log(selectedGenres);
     try {
     
         const response = await apiConnector(
             "POST",
-            "http://localhost:4000/api/v1/search",
+            "http://localhost:4000/api/v1/updateFavCategory",
             {
-              title,
+              userId,
+              selectedGenres,
             }
           );
+        console.log(response);
 
-          
-    
-        navigate("/sea")
+        navigate('/rateBooks');
+        
       }
       catch (error) {
-        console.log("cant logout");
+        console.log(error);
       }
-    }
+}
+
+
+

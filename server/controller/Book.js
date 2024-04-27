@@ -1,4 +1,5 @@
-const book =require('../models/Book')
+const book = require('../models/Book')
+const user = require('../models/User')
 
 const search= async (req, res) => {
   try {
@@ -19,7 +20,16 @@ console.log(searchTerm);
 
 const filterBooks = async (req, res) => {
     try {
-      const { genres } = req.body;
+      const { userId } = req.body;
+
+      const founduser = await user.findById(userId);
+
+      if (!founduser) {
+          return res.status(404).json({ error: 'User not found' });
+      }
+
+      const genres = founduser.myFavCategories;
+
       console.log("Array received:", genres); // Log received array
       
       // Check if genres is an array
@@ -28,8 +38,8 @@ const filterBooks = async (req, res) => {
       }
   
       // Query MongoDB to find books with matching categories (genres)
-      const books = await book.find({ categories: { $elemMatch: { $in: genres } } }).limit(20);
-      console.log('Filtered books:', books); // Log filtered books
+      const books = await book.find({ categories: { $elemMatch: { $in: genres } } }).limit(50);
+    //   console.log('Filtered books:', books); // Log filtered books
   
       res.json(books); // Send filtered books in response
     } catch (error) {
@@ -37,5 +47,8 @@ const filterBooks = async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   };
+
+
+  
 
   module.exports={search, filterBooks};

@@ -6,6 +6,8 @@ const express = require('express');
 const { updateProfile } = require('../controller/Profile');
 const { imageUpload } = require('../config/cloudinary');
 const {OTPsender, signUp, login, changePassword, verifyOTP,hello}=require('../controller/Auth')
+const {getAllRatingsByUserId, createRating}=require('../controller/Ratings')
+const {updateFavoriteCategories}=require('../controller/Category')
 const {search, filterBooks}=require('../controller/Book');
 
 const router = express.Router();
@@ -19,9 +21,13 @@ router.post('/verifyOTP', verifyOTP);
 router.post('/search',search);
 
 router.post('/filterBooks', filterBooks);
+router.post('/myRatings',getAllRatingsByUserId);
+router.post('/createRating', createRating);
  
 
 router.post('/imageUpload', imageUpload);
+router.post('/updateFavCategory', updateFavoriteCategories);
+
 
 router.put('/profile/updateProfile', updateProfile);
 
