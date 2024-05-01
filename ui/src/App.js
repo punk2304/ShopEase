@@ -14,6 +14,8 @@ import Settings from './components/Settings';
 import Myprofile from './components/Myprofile';
 import Dashboard from './components/Dashboard';
 import RateBooks from './components/RateBooks'
+import CourseDetails from './components/ItemPage'
+
 
 
 const App = () => {
@@ -49,6 +51,9 @@ const App = () => {
           </OpenRoute>
         } />
 
+<Route path='/items/:Itemid' element={
+<CourseDetails/>
+}/>
 
         <Route path="/changePassword" element={<ChangePassword/>} />
 

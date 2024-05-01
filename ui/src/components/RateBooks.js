@@ -3,9 +3,10 @@ import { useSelector } from 'react-redux';
 import { apiConnector } from '../services/apiconnector';
 import Book_Card from './Book_Card';
 import Rating_Card from './Rating_Card';
-
+import {Link,useNavigate} from 'react-router-dom'
 
 function RateBooks() {
+  const navigate = useNavigate()
 
   const { user } = useSelector((state) => state.auth);
   const userId = user._id;
@@ -13,6 +14,7 @@ function RateBooks() {
   const [BooksToRate, setBooksToRate] = useState([]);
 
   useEffect(() => {
+    
     const ratingBooks = async () => {
       try {
         const response = await apiConnector(
@@ -32,10 +34,19 @@ function RateBooks() {
     ratingBooks();
   }, [userId]); 
 
-  console.log(BooksToRate);
+  const HandleSubmit=(e)=>{
+
+
+    navigate('/');
+
+
+  }
 
   return (
     <div>
+    <div>
+    <button className='flex' onClick={HandleSubmit}>Submit</button>
+    </div>
          <div className='ml-96 mr-96'>
         <div className="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-3 gap-1 p-2">
          {BooksToRate && BooksToRate?.map((book) => (

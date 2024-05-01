@@ -6,11 +6,18 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
+import { useNavigate } from 'react-router-dom';
+
+
  
 function Book_Card({key,book,height}) {
-  console.log(book)
-  console.log(book.author)
+  const navigate = useNavigate();
   const price=Number(book.price*100)
+  console.log(book)
+  const HandleClick=(e)=>{
+    navigate(`/items/${book._id}`)
+  }
+
   return (
     <Card className='hover:scale-105'>
       <CardHeader shadow={false} floated={false} className="h-96">
@@ -25,9 +32,9 @@ function Book_Card({key,book,height}) {
           <Typography color="blue-gray" className="font-medium">
            {book.title}
           </Typography>
-          <Typography color="blue-gray" className="font-medium">
-          Rs <b>{price}</b>
-          </Typography>
+          {/* <Typography color="blue-gray" className="font-medium">
+          Rs<b>{price}</b>
+          </Typography> */}
         </div>
         <Typography
           variant="small"
@@ -38,11 +45,11 @@ function Book_Card({key,book,height}) {
         </Typography>
       </CardBody>
       <CardFooter className="pt-0">
-        <Button
+        <Button 
           ripple={false}
           fullWidth={true}
           className="bg-orange-400 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
-  >
+    onClick={HandleClick}   >
          Buy Now
         </Button>
       </CardFooter>

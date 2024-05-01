@@ -13,6 +13,7 @@ const GiveRating = () => {
   const navigate=useNavigate();
 
   const { user } = useSelector((state) => state.auth);
+  
   const userId = user._id;
 
   const handleGenreChange = (event) => {

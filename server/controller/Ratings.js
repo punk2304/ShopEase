@@ -8,7 +8,7 @@ async function getAllRatingsByUserId(req, res) {
 
     try {
         // Find all ratings associated with the given userId
-        const ratings = await RatingAndReview.find({ user: userId }).populate('book');
+        const ratings = await RatingAndReview.find({ user: userId });
         
         if (!ratings) {
             return res.status(404).json({ message: 'No ratings found for the user' });

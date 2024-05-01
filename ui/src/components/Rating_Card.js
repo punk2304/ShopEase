@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 function Rating_Card({ book }) {
 
-  const [rating, setRating] = useState(0); // State to store the rating
+  const [rating, setRating] = useState(null); // State to store the rating
     const bookId = book._id;
 
     const { user } = useSelector((state) => state.auth);
@@ -20,6 +20,9 @@ function Rating_Card({ book }) {
 
   useEffect(() => {
     const ratingBooks = async () => {
+      
+
+
       try {
         const response = await apiConnector(
           'POST',
@@ -37,7 +40,10 @@ function Rating_Card({ book }) {
         console.error('Error fetching books data:', error);
       }
     };
+    if(rating!=null)
+      {
     ratingBooks();
+      }
   }, [rating]); 
 
   return (
