@@ -6,27 +6,26 @@ import Book_Card from './Book_Card';
 const SearchPage = () => {
   const { searchTerm } = useParams();
   const [PageData, setPageData] = useState(null);
-
+  
   useEffect(() => {
     const getSearchItems = async () => {
       const response = await apiConnector(
-        'POST',
-        'http://localhost:4000/api/v1/search',
-        {
-          searchTerm,
-        }
+        'GET',
+        `http://localhost:4000/api/v1/search?keyword=${searchTerm}`,
       );
 
       setPageData(response.data);
+      console.log("ye hai response",PageData)
     };
     getSearchItems();
   }, [searchTerm]);
- 
+
 
   return (
     <div className='ml-96 mr-96'>
     <div className="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-3 gap-1 p-2">
-      {PageData?.map((book, i) => (
+    
+      {PageData?.products.map((book, i) => (
        
         <Book_Card key={i} book={book} />
       ))}

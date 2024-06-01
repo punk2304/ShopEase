@@ -1,6 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const User = require('../models/User');
+const User = require('../models/user');
 const {OTP, sendVerificationEmail} = require('../models/OTP');
 const {generateOTP}=require('../utils/otpGenerator');
 const Profile=require('../models/Profile');
@@ -8,9 +8,7 @@ const jwt = require("jsonwebtoken");
 const otpSignUp = require("../templates/otpSignUp");
 const otpChangePassword = require("../templates/otpChangePassword");
 require("dotenv").config();
-const book=require('../models/Book');
 
-const RatingAndReview=require('../models/RatingAndReview')
 // OTP controller
 const OTPsender=async (req, res) => {
   const {email} = req.body;
@@ -45,7 +43,6 @@ const OTPsender=async (req, res) => {
       success: true,
       message: 'otp sent',
       user: {
-      
         email
       },
     });
@@ -221,9 +218,11 @@ const login = async(req, res) =>{
 					//create cookie and send response
 					const options = {
 						expiresIn: new Date(Date.now() + 2*60*60*1000),
-						httpOnly: true
+						httpOnly: true,
+						secure: true, 
+						sameSite: 'None',
 					}
-
+console.log("yuhu",token)
 					res.cookie("token", token, options).status(200).json({
 						success: true,
 						token,
@@ -375,12 +374,107 @@ const verifyOTP = async(req, res) =>{
 
 
 
-  
+const logout = async (req, res, next) => {
+	try{
+    res.cookie('token', null, {
+        expires: new Date(Date.now()),
+        httpOnly: true
+    });
+
+    res.status(200).json({
+        success: true,
+        message: "Logged out"
+    });
+}
+catch(error){
+	console.log(error)
+}
+};
+
+
+
+const allUsers = async (req, res, next) => {
+	try{
+	const users = await User.find();
+	res.status(200).json({ success: true, users });
+	}
+	catch(error){
+		console.log(error);
+	}
+  };
+
+  const getUserDetails = async (req, res, next) => {
+	try{
+	const users = await User.find(req.params.id);
+	if(!user){
+		return (res.status(404).json({
+			success:true,
+			message: "user not found"
+		}))
+	}
+	res.status(200).json({ success: true, users });
+}
+catch(error){
+	console.log(error);
+}
+  };	
+
+//   update user profile by admin
+
+const updateUser=async(req,res)=>{
+try{
+const updateData={
+	name:req.body.name,
+	email:req.body.email,
+	accountType:req.body.accountType
+}
+const user=await user.findByIdAndUpdate(req.params.id,updateData,
+	{	new:true,
+		runValidator:true,
+		userFindAndModify:false,
+
+}
+)
+
+	res.status(200).json({
+		success:true,
+		deleteUser
+	},)
+
+}
+catch(error){
+	console.log(error)
+
+}
+}
+
+const deleteUser=async(req,res)=>{
+	try{
+
+	const user=await user.findById(req.params.id)
+if(!user){
+	return (res.status(404).json({
+		success:true,
+		message:"user not found"
+	}))
+}
+	user.remove
+		res.status(200).json({
+			success:true,
+			message:"user removed"
+		})
 	
+	}
+	catch(error){
+		console.log(error)
+	
+	}
+	}
   
 
 
-module.exports = {OTPsender, signUp, login, changePassword, verifyOTP};
+
+module.exports = {OTPsender, signUp, login, changePassword, verifyOTP,logout,allUsers,getUserDetails,updateUser,deleteUser};
 
 
 

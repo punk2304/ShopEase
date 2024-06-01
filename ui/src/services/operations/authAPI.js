@@ -4,6 +4,7 @@ import { endpoints } from "../apis"
 import { setToken } from "../../slices/authSlice";
 
 import {setUser} from "../../slices/authSlice";
+import axios from "axios";
 
 
 
@@ -15,6 +16,7 @@ const {
 
 
   export const sendOtp = async (email, navigate) => {
+ 
   
 
     try {
@@ -83,7 +85,7 @@ export const login = async (email, password, navigate, dispatch) =>{
       {
         email,
         password
-      }
+      },{withCredentials: true},
     );
     
     console.log("LOGIN API RESPONSE............", response)

@@ -7,7 +7,10 @@ require('dotenv').config();
 const PORT = process.env.PORT || 4000;
 
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000', // your frontend URL
+    credentials: true,
+  }));
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
@@ -24,8 +27,18 @@ const cloudinary = require("./config/cloudinary");
 cloudinary.cloudinaryConnect();
 
 //route import and mount
-const user = require("./routes/routes");
+const user = require("./routes/Auth");
+const product=require("./routes/Product")
+const categories=require("./routes/Categories")
+const profile=require("./routes/Profile")
+const order=require("./routes/Order")
+
 app.use("/api/v1", user);
+app.use("/api/v1",product)
+app.use("/api/v1",categories)
+app.use("/api/v1",profile)
+app.use("/api/v1",order)
+
 //actuivate
 
 app.options('*', cors());

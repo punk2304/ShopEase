@@ -1,39 +1,43 @@
-import React from 'react'
+import React from 'react';
 import { logout } from '../services/operations/authAPI';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-
 function Sidebar() {
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-  return (
-    <div>
-        <div>
-            <ul className='sidebar-values'>
-                <li className='myprofile-section'>
-                    <Link to='my-profile'>My profile</Link>
+    return (
+        <div className="w-64 bg-gray-800 h-full min-h-screen text-white">
+            <ul className="flex flex-col p-4">
+                <li className="mb-4">
+                    <Link to="/dashboard/my-profile" className="text-lg hover:text-blue-500 transition duration-150">
+                        My Profile
+                    </Link>
                 </li>
-                <li className='mycart-section'>
-                    <Link to='my-cart'>My cart</Link>
+                <li className="mb-4">
+                    <Link to="/dashboard/my-cart" className="text-lg hover:text-blue-500 transition duration-150">
+                        My Cart
+                    </Link>
                 </li>
-                <li className='settings-section'>
-                    <Link to='settings'>settings</Link>
+                <li className="mb-4">
+                    <Link to="/dashboard/settings" className="text-lg hover:text-blue-500 transition duration-150">
+                        Settings
+                    </Link>
                 </li>
                 <li
                     onClick={() => {
-                        logout(navigate,dispatch);
-                        // setOpen(false)
-                      }}
-                    className='logout-section'>
-                    <Link>Log Out</Link>
+                        logout(navigate, dispatch);
+                    }}
+                    className="mb-4 cursor-pointer"
+                >
+                    <span className="text-lg hover:text-blue-500 transition duration-150">
+                        Log Out
+                    </span>
                 </li>
             </ul>
         </div>
-    </div>
-  )
+    );
 }
 
-export default Sidebar
+export default Sidebar;

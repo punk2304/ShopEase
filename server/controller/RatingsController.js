@@ -1,5 +1,5 @@
 const RatingAndReview = require('../models/RatingAndReview');
-const book = require('../models/Book');
+const book = require('../models/product');
 const user = require('../models/User');
 
 // Controller function to fetch all ratings of a particular user
@@ -22,11 +22,22 @@ async function getAllRatingsByUserId(req, res) {
 }
 
 async function createRating(req, res){
-    const {userId, bookId, rating} = req.body;
-    console.log("checking from param", userId, bookId, rating);
-    const review = null;
-
     try{
+    const {rating,review} = req.body;
+    const userId=req.user.id;
+    bookId=req.params,id;
+    console.log("checking from param", userId, bookId, rating);
+    if(!review)
+    {
+        review=null; 
+    }
+    if (!founduser) {
+        return res.status(404).json({ error: 'User not found' });
+    }
+    const founduser = await user.findById(userId);
+
+    founduser.ratings.push(savedRating._id);
+   
         const newRating = new RatingAndReview({
             user: userId,
             book: bookId,
@@ -34,19 +45,12 @@ async function createRating(req, res){
             review
         });
 
-        console.log("in createRatings function 11");
         // Save the new rating and review to the database
         const savedRating = await newRating.save();
 
         console.log("rating created");
 
-        const founduser = await user.findById(userId);
-
-        if (!founduser) {
-            return res.status(404).json({ error: 'User not found' });
-        }
-  
-        founduser.ratings.push(savedRating._id);
+       
   
         // Save the updated user object
         await founduser.save();

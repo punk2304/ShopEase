@@ -12,7 +12,7 @@ const SignUp = () => {
    
   const [formData, setFormData] = useState({
  // Default to 'customer'
-    accountType: 'Seller',
+    accountType: 'Admin',
     firstName: '',
     lastName: '',
     email: '',
@@ -61,7 +61,7 @@ sendOtp(formData.email,navigate);
             required
           >
             <option value="Customer">Customer</option>
-            <option value="Seller">Seller</option>
+            <option value="Seller">Admin</option>
           </select>
         </div>
 

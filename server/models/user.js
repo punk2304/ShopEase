@@ -1,4 +1,3 @@
-// Import the Mongoose library
 const mongoose = require("mongoose");
 
 // Define the user schema using the Mongoose Schema constructor
@@ -39,7 +38,7 @@ const userSchema = new mongoose.Schema(
 		// Define the role field with type String and enum values of "Admin", "Student", or "Visitor"
 		accountType: {
 			type: String,
-			enum: ["Customer", "Seller"],
+			enum: ["Customer", "Admin"],
 			required: true,
 		},
 		additionalDetails: {
@@ -60,28 +59,30 @@ const userSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		coldstart:{
-			type:Boolean,
-			default:true
+		coldstart: {
+			type: Boolean,
+			default: true,
 		},
-		ratings:[
+		ratings: [
 			{
 				type: mongoose.Schema.Types.ObjectId,
 				ref: "RatingAndReview",
 			}
 		],
-		myFavCategories:[
+		myFavCategories: [
 			{
-				type:String,
+				type: String,
 			}
 		],
-		
-	
-
-	
+		orders: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "Order",
+			}
+		],
 	},
 	{ timestamps: true }
 );
 
-// Export the Mongoose model for the user schema, using the name "user"
-module.exports = mongoose.model("user", userSchema);
+// Check if the model is already defined before defining it again
+module.exports = mongoose.models.user || mongoose.model("user", userSchema);
