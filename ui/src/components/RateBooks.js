@@ -4,7 +4,7 @@ import { apiConnector } from '../services/apiconnector';
 import Book_Card from './Book_Card';
 import Rating_Card from './Rating_Card';
 import {Link,useNavigate} from 'react-router-dom'
-
+const BASE_URL = process.env.REACT_APP_BASE_URL
 function RateBooks() {
   const navigate = useNavigate()
 
@@ -19,7 +19,7 @@ function RateBooks() {
       try {
         const response = await apiConnector(
           'POST',
-          'http://localhost:4000/api/v1/filterBooks',
+          BASE_URL+'/filterBooks',
           {
             userId,
           }

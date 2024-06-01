@@ -11,7 +11,9 @@ import axios from "axios";
 const {
     SENDOTP_API,
     SIGNUP_API, 
-    LOGIN_API
+    LOGIN_API,
+    CHANGEPASS_API,
+    VERIFYOTP_API,
   } = endpoints
 
 
@@ -22,7 +24,7 @@ const {
     try {
       const response = await apiConnector(
         "POST",
-        "http://localhost:4000/api/v1/OTP",
+        SENDOTP_API,
         {
           email,
           // checkUserPresent: true,
@@ -52,7 +54,7 @@ const {
       console.log("signUp post req data",firstName,lastName,email,password,confirmPassword,accountType,otp);
       const response = await apiConnector(
         "POST",
-        "http://localhost:4000/api/v1/signUp",
+        SIGNUP_API,
         {
           
           firstName,
@@ -120,7 +122,7 @@ export const changePassword = async (email) => {
   try {
     const response = await apiConnector(
       "POST",
-      "http://localhost:4000/api/v1/changePassword",
+      CHANGEPASS_API,
       {
         email
       }
@@ -142,7 +144,7 @@ export const verifyOTP = async (email, otp, newPassword, navigate) => {
   try {
     const response = await apiConnector(
       "POST",
-      "http://localhost:4000/api/v1/verifyOTP",
+      VERIFYOTP_API,
       {
         email,
         otp,

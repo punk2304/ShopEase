@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import StarRating from './StarRating'; // Assuming you have a StarRating component
 import { apiConnector } from '../services/apiconnector';
 import { useSelector } from 'react-redux';
-
+const BASE_URL = process.env.REACT_APP_BASE_URL
 function Rating_Card({ book }) {
 
   const [rating, setRating] = useState(null); // State to store the rating
@@ -26,7 +26,7 @@ function Rating_Card({ book }) {
       try {
         const response = await apiConnector(
           'POST',
-          'http://localhost:4000/api/v1/createRating',
+          BASE_URL+'/createRating',
           {
             userId,
             bookId,

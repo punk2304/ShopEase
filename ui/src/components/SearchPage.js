@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { apiConnector } from '../services/apiconnector';
 import Book_Card from './Book_Card';
-
+const BASE_URL = process.env.REACT_APP_BASE_URL
 const SearchPage = () => {
   const { searchTerm } = useParams();
   const [PageData, setPageData] = useState(null);
@@ -11,7 +11,7 @@ const SearchPage = () => {
     const getSearchItems = async () => {
       const response = await apiConnector(
         'GET',
-        `http://localhost:4000/api/v1/search?keyword=${searchTerm}`,
+        BASE_URL+`search?keyword=${searchTerm}`,
       );
 
       setPageData(response.data);

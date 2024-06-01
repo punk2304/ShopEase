@@ -5,8 +5,12 @@ import { apiConnector } from '../services/apiconnector';
 import GiveRating from './GiveRating'
 import Recommendation from './Recommendation'
 
+const BASE_URL = process.env.REACT_APP_BASE_URL
+
+
 
 const Home = () => {
+  
   const navigate=useNavigate();
   const { user } = useSelector((state) => state.auth);
   console.log("chalo check kare",user);
@@ -31,7 +35,7 @@ const Home = () => {
       try {
         const response = await apiConnector(
           'POST',
-          'http://localhost:4000/api/v1/myRatings',
+          BASE_URL+'/myRatings',
           {
             userId,
           }

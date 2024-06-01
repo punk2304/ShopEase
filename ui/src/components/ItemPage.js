@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { apiConnector } from '../services/apiconnector';
-
+const BASE_URL = process.env.REACT_APP_BASE_URL
 function CourseDetails() {
   const { Itemid } = useParams();
   const [bookDetails, setBookDetails] = useState(null);
@@ -11,7 +11,7 @@ function CourseDetails() {
       try {
         const response = await apiConnector(
           'POST',
-          'http://localhost:4000/api/v1/BookDetails',
+          BASE_URL+'/BookDetails',
           { Itemid }
         );
         setBookDetails(response.data);
