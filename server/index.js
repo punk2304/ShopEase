@@ -43,7 +43,7 @@ app.use("/api/v1",order)
 
 const allowedOrigins = [
     'http://localhost:3000', // Local development
-    'https://papyrus-git-main-punk2304s-projects.vercel.app' // Vercel deployment
+    'https://papyrus-three.vercel.app/' // Vercel deployment
   ];
   
   const corsOptions = {
