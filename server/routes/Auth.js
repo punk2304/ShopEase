@@ -8,7 +8,7 @@ const {OTPsender, signUp, login, changePassword, verifyOTP,logout,allUsers,getUs
 const { auth, isAdmin } = require("../middlewares/auth")
 const router = express.Router();
 
-router.get('/',()=>{
+router.get('/',async (req,res)=>{
     res.send("tesing hori biyankar")
 })
 router.post('/OTP', OTPsender);
