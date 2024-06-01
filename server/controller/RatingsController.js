@@ -1,6 +1,6 @@
 const RatingAndReview = require('../models/RatingAndReview');
 const book = require('../models/product');
-const user = require('../models/User');
+const user = require('../models/user');
 
 // Controller function to fetch all ratings of a particular user
 async function getAllRatingsByUserId(req, res) {
