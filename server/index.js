@@ -41,7 +41,24 @@ app.use("/api/v1",order)
 
 //actuivate
 
-app.options('*', cors());
+const allowedOrigins = [
+    'http://localhost:3000', // Local development
+    'https://papyrus-git-main-punk2304s-projects.vercel.app' // Vercel deployment
+  ];
+  
+  const corsOptions = {
+    origin: function (origin, callback) {
+      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    // Other options such as methods, headers, etc.
+  };
+  
+  app.use(cors(corsOptions));
+  
 
 app.listen(PORT, () => {
     console.log(`App is listening at ${PORT}`);
