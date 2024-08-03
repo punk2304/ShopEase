@@ -13,9 +13,9 @@ const PORT = process.env.PORT | 4000
 
 app.use(express.json({ limit: '10mb' }))
 app.use(cors({
-    origin: '*', // This allows all origins
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
-    allowedHeaders: ['Content-Type', 'Authorization'] // Allowed headers
+    origin: '*', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+    allowedHeaders: ['Content-Type', 'Authorization'] 
 }));
 
 
@@ -31,4 +31,4 @@ app.use('/', Routes);
 
 app.listen(PORT, () => {
     console.log(`Server started at port no. ${PORT}`)
-})
+})g
