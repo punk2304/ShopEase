@@ -16,7 +16,7 @@ const customerRegister = async (req, res) => {
         const existingcustomerByEmail = await Customer.findOne({ email: req.body.email });
 
         if (existingcustomerByEmail) {
-            res.send({ message: 'Email already exists' });
+            return res.send({ message: 'Email already exists' });
         }
         else {
             let result = await customer.save();
@@ -29,11 +29,11 @@ const customerRegister = async (req, res) => {
                 token: token
             };
 
-            res.send(result);
+            return res.send(result);
         }
     } catch (err) {
-        console.error(err);
-        res.status(500).json(err);
+        console.log(err);
+        return res.status(500).json(err);
     }
 };
 
