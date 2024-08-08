@@ -13,7 +13,7 @@ const PORT = process.env.PORT | 4000
 
 app.use(express.json({ limit: '10mb' }))
 app.use(cors({
-    origin: '*', 
+    origin: process.env.FRONTEND_URL || '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE'], 
     allowedHeaders: ['Content-Type', 'Authorization'] 
 }));
