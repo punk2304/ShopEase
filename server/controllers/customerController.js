@@ -32,11 +32,13 @@ const customerRegister = async (req, res) => {
             res.send(result);
         }
     } catch (err) {
+        console.error(err);
         res.status(500).json(err);
     }
 };
 
 const customerLogIn = async (req, res) => {
+ try {
     if (req.body.email && req.body.password) {
         let customer = await Customer.findOne({ email: req.body.email });
         if (customer) {
@@ -61,6 +63,10 @@ const customerLogIn = async (req, res) => {
     } else {
         res.send({ message: "Email and password are required" });
     }
+ } catch (error) {
+    console.log(error);
+    res.send({ message: "Error: " + error.message });
+ }
 };
 
 const getCartDetail = async (req, res) => {
